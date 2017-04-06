@@ -1,0 +1,31 @@
+{
+  "name": "lahliri",
+  "version": "1.0.0",
+  "description": "like iphone SIRI",
+  "main": "liri.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haginl1/liriNodeApp.git"
+  },
+  "keywords": [
+    "node",
+    "liri",
+    "my-tweets"
+  ],
+  "author": "Lisa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haginl1/liriNodeApp/issues"
+  },
+  "homepage": "https://github.com/haginl1/liriNodeApp#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "request": "^2.81.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.0"
+  },
+  "devDependencies": {}
+}
