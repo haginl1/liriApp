@@ -15,10 +15,6 @@ var client = new twitter({
 
 switch (inputString){
 
-	case "help":
-	console.log("Liri is a bot that can connect to your twitter, spoitfy, and the OMBD database. Try typing node liri.js my-tweets, node liri.js spotify-this-song, node liri.js movie-this, or node liri.js do-what-it-says.");
-	break;
-
 	//=========================================
 
 	case "my-tweets":
@@ -28,20 +24,21 @@ switch (inputString){
 	//=========================================
 
 	case "spotify-this-song":
-	var songName = process.argv[3];
+	var songName = "";
 	getSong();
 	break;
 
 	//=========================================
 
 	case "movie-this":
-	console.log("  ");
+	var title = "";
+   defineMovie();
 	break;
 
 	//=========================================
 	
 	case "do-what-it-says":
-	console.log("  ");
+	getDoIt();
 	break;
 }//end of switch case function
 
@@ -65,24 +62,30 @@ function getTweets(){
 
 function getSong(){
  	if (process.argv.length < 4) {
-		console.log("type it");
-		return;
- 	}
-
- 	spotify.search({ type: 'track', query: songName }, function(err, data) {
-
-    if ( err ) {
-        console.log('Error occurred: ' + err);
-        return;
+		songName = "Ace of Base - The Sign";
+        accessSong();
+ 	} else {
+        songName = process.argv[3];
+        accessSong();
     }
- 	
-    console.log(data.tracks.items[0].album.artists[0].name);
-    console.log(data.tracks.items[0].name);
-    console.log(data.tracks.items[0].preview_url);
-    console.log(data.tracks.items[0].album.name);
-		
-	});
-}//end of getSong
+} //end of getSong
+
+function accessSong() {
+
+    spotify.search({ type: 'track', query: songName }, function(err, data) {
+
+        if (err) {
+            console.log('Error occurred: ' + err);
+            return;
+        }
+
+        console.log(data.tracks.items[0].album.artists[0].name);
+        console.log(data.tracks.items[0].name);
+        console.log(data.tracks.items[0].preview_url);
+        console.log(data.tracks.items[0].album.name);
+
+    });
+} //end of accessSong
 
 //=========================================
 
@@ -122,10 +125,10 @@ function getMovie() {
 
 //=========================================
 
-function doIt(){
+function getDoIt(){
 	fs.readFile("random.txt", "utf8", function(error, data){
 		var myArr = data.split(",")
 		songName = myArr[1] 
-		runSong();
+		accessSong();
 	})//end of readFile 
-}//end of doit
+}//end of getDoit
